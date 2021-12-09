@@ -123,6 +123,7 @@ public class Listar extends javax.swing.JFrame {
             Vector resultado = new Vector();
             resultado = Registro.buscarPorPatente(jTextIngreso.getText());
             if (resultado.isEmpty()) {
+                modelo.setRowCount(0);
                 JOptionPane.showMessageDialog(rootPane, "No hay coincidencias");
             } else {
                 modelo.setRowCount(0);
