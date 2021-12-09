@@ -8,6 +8,11 @@ Proyecto MVC que comprende las operaciones básicas con Java y MySQL
 <img src="https://i.imgur.com/IWPug8j.png" title="paypal" width="10%"></a>
 
 
+### **REQUISITOS**
+------------
+Este proyecto fue realizado utilizando OpenJDK 17.0.1_12, utilice la misma version o superior para evitar problemas de compilación.
+Tambien puede optar por realizar un Downgrade si fuera necesario, tomando en cuenta que quiza necesite realizar cambios al codigo para su correcto funcionamiento.
+
 ### **CONFIGURACIONES INICIALES**
 ------------
 
