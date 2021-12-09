@@ -8,8 +8,12 @@ public class Conexion {
 
     static Connection conn = null;
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/automotora?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    private static final String USER = "root";
-    private static final String PASSWORD = "F0011244";
+
+//Ingrese un usuario para conectar a MySql ejemplo= root 
+    private static final String USER = "";
+
+//Ingrese la contraseña del usuario de mySql
+    private static final String PASSWORD = "";
 
     public static Connection getConnection() {
         try {
