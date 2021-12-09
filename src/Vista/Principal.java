@@ -4,10 +4,15 @@
  */
 package Vista;
 
+import java.awt.Image;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -21,6 +26,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
+        fondo();
     }
 
     /**
@@ -32,6 +38,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelFondo = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         procesos = new javax.swing.JMenu();
         agregar = new javax.swing.JMenuItem();
@@ -47,6 +54,8 @@ public class Principal extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 370));
 
         procesos.setText("Procesos");
 
@@ -114,17 +123,6 @@ public class Principal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar2);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -187,6 +185,21 @@ public class Principal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_donarActionPerformed
+    
+    public void fondo() {
+        //Inicializar imagen
+        Image imagen = null;
+        try {
+            //Inicializar y asignar url de la imagen a mostrar
+            URL url = new URL("https://i.imgur.com/iZhLbp7.jpg");
+            //Asignacion de url a la imagen
+            imagen = ImageIO.read(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //Mostrar imagen
+        jLabelFondo.setIcon(new ImageIcon(imagen));
+    }
 
     /**
      * @param args the command line arguments
@@ -229,6 +242,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu ayuda;
     private javax.swing.JMenuItem donar;
     private javax.swing.JMenuItem eliminar;
+    private javax.swing.JLabel jLabelFondo;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem listar;
     private javax.swing.JMenuItem modificar;
