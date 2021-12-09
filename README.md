@@ -1,4 +1,4 @@
-# Manipulación de registros de automoviles
+# Proyecto Automoviles
 Proyecto MVC que comprende las operaciones básicas con Java y MySQL
 
 
@@ -7,6 +7,16 @@ Proyecto MVC que comprende las operaciones básicas con Java y MySQL
 <a href="https://www.paypal.com/paypalme/EAjset?locale.x=es_XC" alt="paypal" target="_blank">
 <img src="https://i.imgur.com/IWPug8j.png" title="paypal" width="10%"></a>
 
+
+### **CONFIGURACIONES INICIALES**
+------------
+
+Luego de clonar este repocitorio, es necesario que en MySQL realice una nueva base de datos y en ella cree la tabla "Vehiculos", el script para la creación se encuentra en el archivo "bd.sql".
+
+Despues de tener lista la BD, realice los cambios en la clase "Conexion" del paquete BD.
+Los datos a editar son, usuario, contraseña y nombre de la base de datos creada, estos parametros se encuentran en las variables remarcadas.
+
+<a href="https://imgur.com/0ZrbcI8"><img src="https://i.imgur.com/0ZrbcI8.jpg" title="source: imgur.com" /></a>
 
 
 ### **FUNCIONALIDADES DEL PROYECTO**
