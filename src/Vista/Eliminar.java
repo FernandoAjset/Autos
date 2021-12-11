@@ -16,12 +16,23 @@ public class Eliminar extends javax.swing.JFrame {
     /**
      * Creates new form Eliminar
      */
+    Registro registro;
+
     public Eliminar() {
         initComponents();
         jLabel1.setOpaque(true);
         jLabel2.setOpaque(true);
         jLabel3.setOpaque(true);
         setLocationRelativeTo(null);
+    }
+
+    public Eliminar(Registro registro) {
+        initComponents();
+        jLabel1.setOpaque(true);
+        jLabel2.setOpaque(true);
+        jLabel3.setOpaque(true);
+        setLocationRelativeTo(null);
+        this.registro = registro;
     }
 
     /**
@@ -88,8 +99,9 @@ public class Eliminar extends javax.swing.JFrame {
         if (jTextIngreso.getText().isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Ingrese una patente");
         } else {
-            if (Registro.eliminar(jTextIngreso.getText())) {
+            if (registro.eliminar(jTextIngreso.getText())) {
                 JOptionPane.showMessageDialog(rootPane, "Se elimino registro con patente: " + jTextIngreso.getText());
+                jTextIngreso.setText("");
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Patente no existe, verifique");
             }
@@ -97,7 +109,7 @@ public class Eliminar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        Principal nuevo = new Principal();
+        Principal nuevo = new Principal(registro);
         nuevo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_salirActionPerformed

@@ -19,8 +19,20 @@ public class Listar extends javax.swing.JFrame {
     /**
      * Creates new form Listar
      */
+    Registro registro;
+
     public Listar() {
         initComponents();
+        jLabel1.setOpaque(true);
+        jLabel2.setOpaque(true);
+        jLabel3.setOpaque(true);
+        setLocationRelativeTo(null);
+    }
+
+
+    public Listar(Registro registro) {
+        initComponents();
+        this.registro=registro;
         jLabel1.setOpaque(true);
         jLabel2.setOpaque(true);
         jLabel3.setOpaque(true);
@@ -104,7 +116,7 @@ public class Listar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        Principal nuevo = new Principal();
+        Principal nuevo = new Principal(registro);
         nuevo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_salirActionPerformed
@@ -112,7 +124,7 @@ public class Listar extends javax.swing.JFrame {
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) jTableListar.getModel();
         if (jTextIngreso.getText().isBlank()) {
-            ArrayList registros = Registro.buscarTodos();
+            ArrayList registros = registro.buscarTodos();
             modelo.setRowCount(0);
             int tamaño = registros.size();
             for (int i = 0; i < tamaño; i++) {
@@ -121,7 +133,7 @@ public class Listar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Mostrando todos los registros");
         } else {
             Vector resultado = new Vector();
-            resultado = Registro.buscarPorPatente(jTextIngreso.getText());
+            resultado = registro.buscarPorPatente(jTextIngreso.getText());
             if (resultado.isEmpty()) {
                 modelo.setRowCount(0);
                 JOptionPane.showMessageDialog(rootPane, "No hay coincidencias");

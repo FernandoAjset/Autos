@@ -12,7 +12,7 @@ public class Modificar extends javax.swing.JFrame {
      * Creates new form Ingresar
      */
     Vehiculo vehiculo = new Vehiculo();
-    Registro registro = new Registro();
+    Registro registro;
 
     public Modificar() {
         initComponents();
@@ -22,6 +22,17 @@ public class Modificar extends javax.swing.JFrame {
         vehiculo.setMarca((String) comboMarca.getSelectedItem());
         guardar.setEnabled(false);
         setLocationRelativeTo(null);
+    }
+    
+        public Modificar(Registro registro) {
+        initComponents();
+        jLabel1.setOpaque(true);
+        jLabel2.setOpaque(true);
+        jLabel3.setOpaque(true);
+        vehiculo.setMarca((String) comboMarca.getSelectedItem());
+        guardar.setEnabled(false);
+        setLocationRelativeTo(null);
+        this.registro=registro;
     }
 
     /**
@@ -185,7 +196,7 @@ public class Modificar extends javax.swing.JFrame {
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        Principal nuevo = new Principal();
+        Principal nuevo = new Principal(registro);
         nuevo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_salirActionPerformed

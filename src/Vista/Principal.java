@@ -4,6 +4,11 @@
  */
 package Vista;
 
+import BD.Conexion;
+import java.sql.*;
+import static BD.Conexion.*;
+import Controlador.Registro;
+import com.sun.jdi.connect.spi.Connection;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,10 +28,32 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    private java.sql.Connection conn;
+    Registro registro;
+
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
         fondo();
+        conn = Conexion.getConnection();
+        registro = new Registro(this.conn);
+        if (!registro.probarConexion()) {
+            procesos.setEnabled(false);
+            ayuda.setEnabled(false);
+            JOptionPane.showConfirmDialog(null, "NO SE PUDO CONECTAR CON LA BD, REVISE SU CONEXION", "ERROR DE BD", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public Principal(Registro registro) {
+        initComponents();
+        setLocationRelativeTo(null);
+        fondo();
+        this.registro = registro;
+        if (!registro.probarConexion()) {
+            procesos.setEnabled(false);
+            ayuda.setEnabled(false);
+            JOptionPane.showConfirmDialog(null, "NO SE PUDO CONECTAR CON LA BD, REVISE SU CONEXION", "ERROR DE BD", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -127,19 +154,19 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        Ingresar nuevo = new Ingresar();
+        Ingresar nuevo = new Ingresar(registro);
         this.setVisible(false);
         nuevo.setVisible(true);
     }//GEN-LAST:event_agregarActionPerformed
 
     private void listarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarActionPerformed
-        Listar nuevo = new Listar();
+        Listar nuevo = new Listar(registro);
         this.setVisible(false);
         nuevo.setVisible(true);
     }//GEN-LAST:event_listarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        Modificar nuevo = new Modificar();
+        Modificar nuevo = new Modificar(registro);
         this.setVisible(false);
         nuevo.setVisible(true);
     }//GEN-LAST:event_modificarActionPerformed
@@ -149,7 +176,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        Eliminar nuevo = new Eliminar();
+        Eliminar nuevo = new Eliminar(registro);
         this.setVisible(false);
         nuevo.setVisible(true);
     }//GEN-LAST:event_eliminarActionPerformed
@@ -185,13 +212,13 @@ public class Principal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_donarActionPerformed
-    
+
     public void fondo() {
         //Inicializar imagen
         Image imagen = null;
         try {
             //Inicializar y asignar url de la imagen a mostrar
-            URL url = new URL("https://i.imgur.com/iZhLbp7.jpg");
+            URL url = new URL("https://i.imgur.com/F2uEALy.jpg");
             //Asignacion de url a la imagen
             imagen = ImageIO.read(url);
         } catch (IOException e) {

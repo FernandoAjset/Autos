@@ -11,7 +11,7 @@ public class Ingresar extends javax.swing.JFrame {
      * Creates new form Ingresar
      */
     Vehiculo vehiculo = new Vehiculo();
-    Registro registro = new Registro();
+    Registro registro;
 
     public Ingresar() {
         initComponents();
@@ -20,6 +20,16 @@ public class Ingresar extends javax.swing.JFrame {
         jLabel3.setOpaque(true);
         vehiculo.setMarca((String) comboMarca.getSelectedItem());
         setLocationRelativeTo(null);
+    }
+
+    public Ingresar(Registro registro) {
+        initComponents();
+        jLabel1.setOpaque(true);
+        jLabel2.setOpaque(true);
+        jLabel3.setOpaque(true);
+        vehiculo.setMarca((String) comboMarca.getSelectedItem());
+        setLocationRelativeTo(null);
+        this.registro = registro;
     }
 
     /**
@@ -172,7 +182,7 @@ public class Ingresar extends javax.swing.JFrame {
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        Principal nuevo = new Principal();
+        Principal nuevo = new Principal(registro);
         nuevo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_salirActionPerformed

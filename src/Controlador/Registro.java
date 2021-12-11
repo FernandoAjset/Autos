@@ -10,6 +10,23 @@ import java.util.logging.Logger;
 
 public class Registro {
 
+    private Connection conexion;
+
+    public Registro(Connection conexion) {
+        this.conexion = conexion;
+    }
+
+    public Registro() {
+    }
+
+    public boolean probarConexion() {
+        boolean estado = false;
+        if (this.conexion != null) {
+            estado = true;
+        }
+        return estado;
+    }
+
     public boolean agregar(Vehiculo vehiculo) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -17,7 +34,7 @@ public class Registro {
         String SQL_INSERT = "INSERT INTO vehiculo values(?, ?, ?, ?, ?, ?, ?)";
         String SQL_SELECT = "SELECT patente from vehiculo";
         boolean existe = false, estado = false;
-        conn = Conexion.getConnection();
+        conn = this.conexion != null ? this.conexion : Conexion.getConnection();
         try {
             ps = conn.prepareStatement(SQL_SELECT);
             rs = ps.executeQuery();
@@ -45,7 +62,9 @@ public class Registro {
             try {
                 rs.close();
                 ps.close();
-                conn.close();
+                if (this.conexion == null) {
+                    Conexion.close(conn);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -53,7 +72,7 @@ public class Registro {
         return estado;
     }
 
-    public static boolean eliminar(String patente) {
+    public boolean eliminar(String patente) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -61,7 +80,7 @@ public class Registro {
         String SQL_SELECT = "SELECT patente from vehiculo";
         boolean existe = false, estado = false;
 
-        conn = Conexion.getConnection();
+        conn = this.conexion != null ? this.conexion : Conexion.getConnection();
         try {
             ps = conn.prepareStatement(SQL_SELECT);
             rs = ps.executeQuery();
@@ -82,7 +101,9 @@ public class Registro {
             try {
                 rs.close();
                 ps.close();
-                conn.close();
+                if (this.conexion == null) {
+                    Conexion.close(conn);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -96,7 +117,7 @@ public class Registro {
         PreparedStatement ps = null;
         String SQL_UPDATE = "UPDATE vehiculo SET patente=?, marca=?, modelo=?, anno=?, numero_motor=?, numero_chasis=?, estado=? WHERE patente='" + vehiculo.getPatente() + "'";
         try {
-            conn = Conexion.getConnection();
+            conn = this.conexion != null ? this.conexion : Conexion.getConnection();
             if (conn.getAutoCommit()) {
                 conn.setAutoCommit(false);
             }
@@ -121,7 +142,9 @@ public class Registro {
         } finally {
             try {
                 ps.close();
-                conn.close();
+                if (this.conexion == null) {
+                    Conexion.close(conn);
+                }
             } catch (SQLException ex) {
                 ex.printStackTrace(System.out);
             }
@@ -129,14 +152,14 @@ public class Registro {
         return r;
     }
 
-    public static Vector buscarPorPatente(String patente) {
+    public Vector buscarPorPatente(String patente) {
         Vector resultado = new Vector();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         String SELECT = "SELECT patente, marca, modelo, anno, numero_motor, numero_chasis, estado FROM vehiculo where patente='" + patente + "'";
 
-        conn = Conexion.getConnection();
+        conn = this.conexion != null ? this.conexion : Conexion.getConnection();
         try {
             ps = conn.prepareStatement(SELECT);
             rs = ps.executeQuery();
@@ -160,7 +183,9 @@ public class Registro {
             try {
                 rs.close();
                 ps.close();
-                conn.close();
+                if (this.conexion == null) {
+                    Conexion.close(conn);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -169,13 +194,13 @@ public class Registro {
         return resultado;
     }
 
-    public static ArrayList buscarTodos() {
+    public ArrayList buscarTodos() {
         ArrayList registros = new ArrayList();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         String SELECT = "SELECT patente, marca, modelo, anno, numero_motor, numero_chasis, estado FROM vehiculo";
-        conn = Conexion.getConnection();
+        conn = this.conexion != null ? this.conexion : Conexion.getConnection();
         try {
             ps = conn.prepareStatement(SELECT);
             rs = ps.executeQuery();
@@ -200,7 +225,10 @@ public class Registro {
             try {
                 rs.close();
                 ps.close();
-                conn.close();
+
+                if (this.conexion == null) {
+                    Conexion.close(conn);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             }
